@@ -4,6 +4,8 @@ tests_1b.py
 This module contains unit tests for the simple_calculator function defined in lab_1b.py.
 """
 
+from multiprocessing import Value
+
 import pytest
 from labs.lab_1.lab_1b import simple_calculator
 
@@ -26,6 +28,7 @@ def test_division():
     assert simple_calculator("divide", 6, 3) == 2       # Test for positive numbers
     assert simple_calculator("divide", -4, 2) == -2     # Test for negative and positive number
     assert simple_calculator("divide", 5, 2) == 2.5     # Test for division resulting in float
+    assert simple_calculator("divide", 0, 13) == 0      # Test for zero dividend
 
 def test_division_by_zero():
     with pytest.raises(ValueError, match="Cannot divide by zero."):
@@ -36,6 +39,8 @@ def test_invalid_operation():
         simple_calculator("modulus", 5, 3)              # Test for invalid operation
     with pytest.raises(ValueError, match="Invalid operation. Please choose from 'add', 'subtract', 'multiply', or 'divide'."):
         simple_calculator("", 5, 3)                     # Test for empty operation
+
+
 
 if __name__ == "__main__":
     pytest.main()
